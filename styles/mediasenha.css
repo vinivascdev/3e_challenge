@@ -1,0 +1,61 @@
+@media screen and (max-width: 600px){
+    .body {
+        background-color: white;
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+
+    header{
+        min-width: 100vw;
+    }
+
+    .formcontainer {
+        background-color: transparent;
+        box-shadow: none;
+        max-width: 80vw;
+        height: 60vh;
+    }
+
+    #enviar{
+        max-width: 23rem;
+    }
+
+    .senhaname h1{
+        font-size: 2rem;
+        width: 80%;
+        text-align: center;
+    }
+
+    #email{
+        width: 80%;
+    }
+
+    .textinho{
+        width: 80%;
+    }
+
+    .senhaname{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .seta a{
+        width: 90%;
+    }
+
+    .textinho p{
+        text-align: center;
+    }
+
+    .senhaname h1::before{
+        content: '';
+        position: absolute;
+        background-color: black;
+        height: 45px;
+        width: 5px;
+        left: -15px;
+        background: linear-gradient(#F65D09, #FECC17);
+        border-radius: 50px;
+    }
+}

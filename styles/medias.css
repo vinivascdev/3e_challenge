@@ -1,0 +1,28 @@
+@media screen and (max-width: 600px) {
+    body {
+        background-color: white;
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+
+    header{
+        min-width: 100vw;
+    }
+
+    .formcontainer {
+        background-color: transparent;
+        box-shadow: none;
+        max-width: 50vw;
+        height: 60vh;
+    }
+
+    #enviar{
+        max-width: 23rem;
+    }
+
+    #username,
+    #password {
+        max-width: 20rem;
+        height: 67px;
+    }
+}
