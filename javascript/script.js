@@ -24,3 +24,20 @@ fetch('/php/banco.php')
     .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
     });
+    
+    function submitForm() {
+        var form = document.getElementById('myForm');
+        var formData = new FormData(form);
+
+        fetch('banco.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('response').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }

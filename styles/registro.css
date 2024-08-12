@@ -75,7 +75,9 @@ header img {
 }
 
 #username,
-#password {
+#password,
+#password2,
+#email {
     border: none;
     width: 25rem;
     height: 67px;
@@ -112,40 +114,12 @@ header img {
     font-size: 20px;
 }
 
-#password{
-    margin-top: 2rem;
-}
-
-.registro{
+.registro form{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.esqueceu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-    width: 100%;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    color: #F65D09;
-    font-size: 1rem;
-}
-.esqueceu a{
-    text-decoration: none;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    color: #F65D09;
-    font-size: 1rem;
-}
-
-#check{
-    transform: scale(1.5);
+    flex-direction: column;
+    gap: 25px;
 }
 
 .registro p{
@@ -162,3 +136,6 @@ header img {
     color: #F65D09;
 }
 
+.registro{
+    text-align: center;
+}

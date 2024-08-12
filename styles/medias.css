@@ -1,4 +1,4 @@
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     body {
         background-color: white;
         min-height: 100vh;
@@ -20,8 +20,18 @@
         max-width: 23rem;
     }
 
+    .registrocontainer{
+        margin-bottom: 50px;
+    }
+
+    #registro-login{
+        margin-top: 50px;
+    }
+
     #username,
-    #password {
+    #password,
+    #email,
+    #password2{
         max-width: 20rem;
         height: 67px;
     }

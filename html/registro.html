@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | 3e Soluções</title>
-    <link rel="stylesheet" href="/styles/registro.css">
+    <link rel="stylesheet" href="../styles/registro.css">
     <link rel="stylesheet" href="/styles/medias.css">
 </head>
-
 <body>
     <header>
         <img src="/logos3e/3elogo2.png" alt="Logo 3E Soluções">
@@ -21,22 +19,22 @@
             </div>
 
             <div class="registro">
-                <form>
-                    <input id="username" type="text" placeholder="Nome de Usuário" required><br>
-                    <input id="password" type="password" placeholder="Senha" required><br>
-                    <input id="password" type="password" placeholder="Confirme Sua Senha" required><br>
+                <form id="myForm">
+                    <input id="username" type="text" placeholder="Nome de Usuário" required>
+                    <input id="email" type="email" placeholder="Email" required>
+                    <input id="password" type="password" placeholder="Senha" required>
+                    <input id="password2" type="password" placeholder="Confirme Sua Senha" required>
                     <input id="enviar" type="submit" value="Cadastrar">
                 </form>
             </div>
 
         </div>
-
-        <div class="registro">
-            <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
-        </div>
     </section>
+    <div class="registro" id="registro-login">
+        <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
+    </div>
 </body>
-<script src="/javascript/script.js">
-</script>
+
+<script src="../javascript/script.js"></script>
 
 </html>
