@@ -19,12 +19,12 @@
             </div>
 
             <div class="registro">
-                <form id="myForm">
-                    <input id="username" type="text" placeholder="Nome de Usuário" required>
-                    <input id="email" type="email" placeholder="Email" required>
-                    <input id="password" type="password" placeholder="Senha" required>
-                    <input id="password2" type="password" placeholder="Confirme Sua Senha" required>
-                    <input id="enviar" type="submit" value="Cadastrar">
+                <form id="myForm" method="POST" action="http://localhost:8001/banco.php">
+                    <input id="username" name="username" type="text" placeholder="Nome de Usuário" required>
+                    <input id="email" name="email" type="email" placeholder="Email" required>
+                    <input id="password" name="password" type="password" placeholder="Senha" required>
+                    <input id="password2" name="password" type="password" placeholder="Confirme Sua Senha">
+                    <input id="enviar" type="button" value="Cadastrar">
                 </form>
             </div>
 

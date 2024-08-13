@@ -1,37 +1,35 @@
 <?php
-$servername = "mysql:host=localhost;dbname=3e_challenge;charset=utf8";
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+
+$servername = "localhost";
 $username = "root";
 $password = "64121";
 $dbname = "3e_challenge";
 
-$conn = new PDO($servername, $username, $password);
-$sql = "SELECT id, user_name, password, email FROM users";
-$result = $conn->query($sql);
+// Cria a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      echo "id: " . $row["id"]. " Name: " . $row["user_name"]. " Password " . $row["password"]. "<br>";
-    }
-  } else {
-    echo "0 results";
-  }
-
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-
-    // Validação básica
-    if (empty($name) || empty($email)) {
-        echo "Nome e e-mail são obrigatórios.";
-        exit;
-    }
-
-    // Processar os dados (por exemplo, salvar no banco de dados, enviar e-mail, etc.)
-    // Aqui apenas retornamos uma mensagem de sucesso
-    echo "Dados recebidos com sucesso! Nome: $name, E-mail: $email";
-} else {
-    echo "Método de requisição inválido.";
+// Verifica a conexão
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Captura os dados do formulário
+$username = $_POST['username'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+// Insere os dados no banco de dados
+$sql = "INSERT INTO users (user_name, password, email, created_at, updated_at)
+        VALUES ('$username', '$password', '$email', NOW(), NOW())";
+
+if ($conn->query($sql) === TRUE) {
+    echo json_encode(["success" => true, "message" => "Usuário registrado com sucesso!"]);
+} else {
+    echo json_encode(["success" => false, "message" => "Erro ao registrar usuário: " . $conn->error]);
+}
+
+// Fecha a conexão
 $conn->close();
 ?>

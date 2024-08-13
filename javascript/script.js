@@ -1,43 +1,29 @@
-// const response = ajax({
-//     url:'/php/banco.php',
-//     method: 'GET',
-// })
+const form = document.querySelector("#myForm");
 
-// fetch('/php/banco.php') 
-//     .then((response)=>{
-//         console.log (response)
-//     })
-//     .catch((error)=>{
-//         console.log(error)
-//     })
+async function sendData(event) {
+  event.preventDefault(); // Previne o comportamento padrão de submissão do formulário
 
-fetch('/php/banco.php') 
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response; 
-    })
-    .then((data) => {
-        console.log(data, 'a');
-    })
-    .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch("http://localhost:8001/banco.php", {
+      method: "POST",
+      body: formData,
     });
-    
-    function submitForm() {
-        var form = document.getElementById('myForm');
-        var formData = new FormData(form);
 
-        fetch('banco.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('response').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    const data = await response.json();
+    console.log(data);
+
+    if (data.success) {
+      alert(data.message);
+    } else {
+      alert("Erro: " + data.message);
     }
+  } catch (e) {
+    console.error("Error:", e);
+    alert("Ocorreu um erro ao enviar os dados.");
+  }
+}
+
+const send = document.querySelector("#enviar");
+send.addEventListener("click", sendData);
