@@ -1,0 +1,8 @@
+# Ignorar a pasta vendor
+vendor/
+
+# Ignorar o arquivo .env
+.env
+
+# Ignorar o arquivo composer.json
+composer.json

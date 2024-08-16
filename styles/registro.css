@@ -34,7 +34,7 @@ header img {
 }
 
 .formcontainer{
-    width: 556px;
+width: 556px;
     height: 657px;
     background-color: white;
     border-radius: 65px;
@@ -97,7 +97,7 @@ header img {
     font-style: normal;
     color: white;
     font-size: 30px;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     cursor: pointer;
     text-align: center;
 }
@@ -138,4 +138,13 @@ header img {
 
 .registro{
     text-align: center;
+}
+
+.error {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    text-align: left;
+    color: red;
+    font-size: 1rem;
+    margin-top: -1rem;
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <img src="/logos3e/3elogo2.png" alt="Logo 3E Soluções">
+        <img src="/assets/3elogo2.png" alt="Logo 3E Soluções">
     </header>
 
     <section class="registrocontainer">
@@ -21,20 +21,21 @@
             <div class="registro">
                 <form id="myForm" method="POST" action="http://localhost:8001/banco.php">
                     <input id="username" name="username" type="text" placeholder="Nome de Usuário" required>
+                    <span id="username-error" class="error"></span>
                     <input id="email" name="email" type="email" placeholder="Email" required>
+                    <span id="email-error" class="error"></span>
                     <input id="password" name="password" type="password" placeholder="Senha" required>
-                    <input id="password2" name="password" type="password" placeholder="Confirme Sua Senha">
+                    <input id="password2" name="password2" type="password" placeholder="Confirme Sua Senha">
+                    <span id="password-error" class="error"></span>
                     <input id="enviar" type="button" value="Cadastrar">
                 </form>
             </div>
-
         </div>
     </section>
     <div class="registro" id="registro-login">
         <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
     </div>
+    
+    <script src="../javascript/script.js"></script>
 </body>
-
-<script src="../javascript/script.js"></script>
-
 </html>

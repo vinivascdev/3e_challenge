@@ -1,27 +1,73 @@
 const form = document.querySelector("#myForm");
 
 async function sendData(event) {
-  event.preventDefault(); // Previne o comportamento padrão de submissão do formulário
+  event.preventDefault();
 
   const formData = new FormData(form);
+  const sendButton = document.querySelector("#enviar");
+  const emailErrorElement = document.querySelector("#email-error");
+  const passwordErrorElement = document.querySelector("#password-error");
+  const usernameErrorElement = document.querySelector("#username-error");
 
-  try {
-    const response = await fetch("http://localhost:8001/banco.php", {
-      method: "POST",
-      body: formData,
-    });
+  const emailField = document.querySelector("#email");
+  const usernameField = document.querySelector("#username");
+  const email = emailField.value;
+  const username = usernameField.value;
+  const password = document.querySelector("#password").value;
+  const password2 = document.querySelector("#password2").value;
+  
+  let valid = true;
 
-    const data = await response.json();
-    console.log(data);
+  sendButton.disabled = true;
+  emailErrorElement.textContent = '';
+  passwordErrorElement.textContent = '';
+  usernameErrorElement.textContent = '';
 
-    if (data.success) {
-      alert(data.message);
-    } else {
-      alert("Erro: " + data.message);
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailPattern.test(email)) {
+    emailErrorElement.textContent = 'Por favor, insira um email válido.';
+    valid = false;
+  }
+
+  const usernamePattern = /^[a-zA-Z][a-zA-Z0-9_]{3,14}$/;
+  if (!usernamePattern.test(username)) {
+    usernameErrorElement.textContent = 'Nome de usuário inválido.';
+    valid = false;
+  }
+
+  if (password !== password2) {
+    passwordErrorElement.textContent = 'Senhas não coincidem.';
+    valid = false;
+  }
+
+  if (valid) {
+    try {
+      const response = await fetch("http://localhost:8001/php/banco.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if (data.success) {
+        alert(data.message);
+        form.reset();
+      } else {
+        if (data.message === "Email já cadastrado.") {
+          emailErrorElement.textContent = data.message;
+        } else {
+          passwordErrorElement.textContent = data.message;
+        }
+      }
+    } catch (e) {
+      console.error("Error:", e);
+      passwordErrorElement.textContent = "Ocorreu um erro ao enviar os dados.";
+    } finally {
+      sendButton.disabled = false;
     }
-  } catch (e) {
-    console.error("Error:", e);
-    alert("Ocorreu um erro ao enviar os dados.");
+  } else {
+    sendButton.disabled = false;
   }
 }
 
