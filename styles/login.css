@@ -161,3 +161,10 @@ header img {
     color: #F65D09;
 }
 
+.error {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+}

@@ -130,14 +130,9 @@ header img {
     margin-top: 2rem;
 }
 
-.seta a{
-    width: 85%;
-}
-
 .seta{
-width: 100%;
+width: 85%;
 display: flex;
-justify-content: center;
 margin-bottom: 1rem;
 }
 
@@ -145,4 +140,17 @@ margin-bottom: 1rem;
     font-size: 2.2rem;
     text-align: left;
     color: #F65D09;
+}
+
+.error {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+}
+
+.success {
+    font-family: "Poppins", sans-serif;
+    color: green;
 }
