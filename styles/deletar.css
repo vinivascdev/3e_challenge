@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F3F3F3;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    width: 100vw;
+    height: 80px;
+    border-bottom: 3px solid #F65D09;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EBEBEB;
+}
+
+header img {
+    width: 56px;
+    height: 55px;
+}
+
+.btn-container{
+    width: 100vw;
+    height: calc(100vh - 83px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#deleteUserButton{
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 20px;
+    padding: 20px 15px;
+    /* transition: .3s ease-in; */
+}
+
+#deleteUserButton:hover{
+    cursor: pointer;
+    color: red;
+    border: 3px solid red;
+    padding: 17px 12px;
+    background-color: white;
+}
+
+#deleteUserButton:active{
+    transform: scale(0.98);
+}
