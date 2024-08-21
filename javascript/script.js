@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector("#recoveryForm") || document.querySelector("#loginForm") || document.querySelector("#myForm");
 
+  let usernamedelete = "";
   async function sendData(event) {
     event.preventDefault();
 
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         const action = form.id === "myForm" ? "register" : form.id === "loginForm" ? "login" : "recover";
         formData.append("action", action);
+        console.log(formData);
 
         const response = await fetch("http://localhost:8001/php/banco.php", {
           method: "POST",
@@ -65,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const data = await response.json();
-
+        console.log(data.username);
         if (data.success) {
-          if (action === "recover") {
-            recoveryErrorElement.textContent = data.message;
-            recoveryErrorElement.classList.add('success');
+          usernamedelete = data.username;
+          if (data.redirect) {
+            window.location.href = data.redirect;
           } else {
             alert(data.message);
             form.reset();
@@ -85,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           } else if (action === "login") {
             generalErrorElement.textContent = data.message;
-          } else if (action === "recover") {
+          }
+          else if (action === "recover") {
             recoveryErrorElement.textContent = data.message;
             recoveryErrorElement.classList.remove('success');
           }
@@ -104,5 +107,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const send = document.querySelector("#enviar");
   if (send) {
     send.addEventListener("click", sendData);
+  }
+
+  const deleteButton = document.querySelector("#deleteUserButton");
+
+  if (deleteButton) {
+    deleteButton.addEventListener("click", async function () {
+      const confirmDelete = confirm("Tem certeza que deseja deletar sua conta?");
+      if (confirmDelete) {
+        try {
+          console.log(usernamedelete);
+          const formData = new FormData();
+          formData.append("action", "delete");
+          formData.append("usernamedelete", usernamedelete);
+
+          const response = await fetch("http://localhost:8001/php/banco.php", {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            alert(data.message);
+            window.location.href = "login.html";
+          } else {
+            alert("Erro ao deletar a conta: " + data.message);
+          }
+        } catch (error) {
+          console.error("Error:", error.stack);
+          alert("Ocorreu um erro ao deletar a conta.");
+        }
+      }
+    });
   }
 });
