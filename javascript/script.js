@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (form.id === "myForm") {
       const usernamePattern = /^[a-zA-Z][a-zA-Z0-9_]{3,14}$/;
       if (!usernamePattern.test(username)) {
-        usernameErrorElement.textContent = 'Nome de usuário inválido.';
+        usernameErrorElement.textContent = 'Seu nome de usuário deve conter 15 caracteres ou menos e conter somente letras, números, sublinhados e nenhum espaço.';
         valid = false;
       }
 
@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         const action = form.id === "myForm" ? "register" : form.id === "loginForm" ? "login" : "recover";
         formData.append("action", action);
-        console.log(formData);
 
         const response = await fetch("http://localhost:8001/php/banco.php", {
           method: "POST",
@@ -67,9 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const data = await response.json();
-        console.log(data.username);
         if (data.success) {
           usernamedelete = data.username;
+          localStorage.setItem("username", data.username)
+          // console.log(localStorage);
           if (data.redirect) {
             window.location.href = data.redirect;
           } else {
@@ -112,6 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const deleteButton = document.querySelector("#deleteUserButton");
 
   if (deleteButton) {
+    const usernamedelete = localStorage.getItem("username");
+    console.log(localStorage);
     deleteButton.addEventListener("click", async function () {
       const confirmDelete = confirm("Tem certeza que deseja deletar sua conta?");
       if (confirmDelete) {
@@ -129,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const data = await response.json();
           if (data.success) {
             alert(data.message);
+            localStorage.removeItem("username");
             window.location.href = "login.html";
           } else {
             alert("Erro ao deletar a conta: " + data.message);

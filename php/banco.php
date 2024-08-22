@@ -9,6 +9,7 @@ $dotenv->load();
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Acess-Control-Allow-Methods: POST, GET, OPTIONS");
 
 $servername = $_ENV['DB_SERVERNAME'];
 $username = $_ENV['DB_USERNAME'];
@@ -61,7 +62,7 @@ if ($action === 'register') {
     $sql->bind_param("sss", $form_username, $hashedPassword, $form_email);
 
     if ($sql->execute()) {
-        echo json_encode(["success" => true, "message" => "Usuário registrado com sucesso!"]);
+        echo json_encode(["success" => true, "message" => "Usuário registrado com sucesso!", "redirect" => "login.html"]);
     } else {
         echo json_encode(["success" => false, "message" => "Erro ao registrar usuário: " . $conn->error]);
     }
@@ -89,25 +90,6 @@ if ($action === 'login') {
     } else {
         echo json_encode(["success" => false, "message" => "Usuário ou senha inválidos."]);
     }
-} elseif ($action === 'delete') {
-
-    // Recupera o nome de usuário da sessão
-    $form_username = $_SESSION['username'];
-    $usernamedelete = $_POST['usernamedelete'];
-
-    if ($form_username) {
-        $sql = $conn->prepare("DELETE FROM users WHERE user_name = ?");
-        $sql->bind_param("s", $form_username);
-
-        if ($sql->execute()) {
-            session_destroy(); // Destruir a sessão após deletar o usuário
-            echo json_encode(["success" => true, "message" => "Usuário deletado com sucesso."]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Erro ao deletar usuário: " . $conn->error]);
-        }
-    } else {
-        echo json_encode(["success" => false, "message" => "Usuário não encontrado."]);
-    }
 } elseif ($action === 'recover') {
     $form_email = $_POST['email'];
 
@@ -120,6 +102,25 @@ if ($action === 'login') {
         echo json_encode(["success" => true, "message" => "Cheque o link que enviamos ao seu Email."]);
     } else {
         echo json_encode(["success" => false, "message" => "Email não cadastrado."]);
+    }
+} elseif ($action === 'delete') {
+
+    // Recupera o nome de usuário da sessão
+    $form_username = $_SESSION['username'];
+    $usernamedelete = $_POST['usernamedelete'];
+
+    if ($usernamedelete) {
+        $sql = $conn->prepare("DELETE FROM users WHERE user_name = ?");
+        $sql->bind_param("s", $usernamedelete);
+
+        if ($sql->execute()) {
+            session_destroy(); // Destruir a sessão após deletar o usuário
+            echo json_encode(["success" => true, "message" => "Usuário deletado com sucesso."]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Erro ao deletar usuário: " . $conn->error]);
+        }
+    } else {
+        echo json_encode(["success" => false, "message" => "Usuário não encontrado."]);
     }
 }
 
